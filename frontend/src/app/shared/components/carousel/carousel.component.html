@@ -1,0 +1,38 @@
+<div class="carousel" *ngIf="hasImages">
+  <div class="carousel-inner">
+    <button class="carousel-control carousel-control-prev" (click)="previousImage()" aria-label="Previous">
+      ‹
+    </button>
+
+    <div class="carousel-image-container">
+      <img
+        *ngIf="currentImage"
+        [src]="currentImage.url"
+        [alt]="'Cat image ' + (currentIndex + 1)"
+        class="carousel-image"
+      >
+    </div>
+
+    <button class="carousel-control carousel-control-next" (click)="nextImage()" aria-label="Next">
+      ›
+    </button>
+  </div>
+
+  <div class="carousel-indicators">
+    <button
+      *ngFor="let image of images; let i = index"
+      class="carousel-indicator"
+      [class.active]="i === currentIndex"
+      (click)="goToImage(i)"
+      [attr.aria-label]="'Go to image ' + (i + 1)"
+    ></button>
+  </div>
+
+  <div class="carousel-counter">
+    {{ currentIndex + 1 }} / {{ images.length }}
+  </div>
+</div>
+
+<div class="carousel-empty" *ngIf="!hasImages">
+  <p>No images available</p>
+</div>

@@ -1,0 +1,96 @@
+<div class="auth-container">
+  <div class="auth-card card">
+    <div class="card-header">
+      <h2>Registrarse</h2>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()">
+        <div class="alert alert-error" *ngIf="error">
+          {{ error }}
+        </div>
+
+        <div class="form-group">
+          <label for="firstName" class="form-label">Nombre</label>
+          <input
+            type="text"
+            id="firstName"
+            class="form-control"
+            [(ngModel)]="firstName"
+            name="firstName"
+            placeholder="Carlos"
+            required
+            [disabled]="loading"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="lastName" class="form-label">Apellido</label>
+          <input
+            type="text"
+            id="lastName"
+            class="form-control"
+            [(ngModel)]="lastName"
+            name="lastName"
+            placeholder="García"
+            required
+            [disabled]="loading"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Correo Electrónico</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            placeholder="tu@correo.com"
+            required
+            [disabled]="loading"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Contraseña</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Mínimo 6 caracteres"
+            required
+            [disabled]="loading"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirmar Contraseña</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            placeholder="Repite tu contraseña"
+            required
+            [disabled]="loading"
+          >
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary btn-block"
+          [disabled]="loading"
+        >
+          {{ loading ? 'Creando cuenta...' : 'Registrarse' }}
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p>¿Ya tienes una cuenta? <a routerLink="/auth/login">Inicia sesión aquí</a></p>
+      </div>
+    </div>
+  </div>
+</div>

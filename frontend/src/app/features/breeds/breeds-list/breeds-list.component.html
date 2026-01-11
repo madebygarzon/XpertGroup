@@ -1,0 +1,133 @@
+<div class="container breeds-container">
+  <h1 class="page-title">Razas de Gatos</h1>
+
+  <app-loader *ngIf="loading"></app-loader>
+
+  <div class="alert alert-error" *ngIf="error">
+    {{ error }}
+    <button class="btn btn-sm btn-primary mt-2" (click)="loadBreeds()">Reintentar</button>
+  </div>
+
+  <div *ngIf="!loading && !error">
+    <!-- Breed Selector -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <div class="form-group">
+          <label for="breedSelect" class="form-label">Selecciona una Raza:</label>
+          <select
+            id="breedSelect"
+            class="form-control"
+            (change)="onBreedSelected($event)"
+          >
+            <option value="">-- Elige una raza --</option>
+            <option *ngFor="let breed of breeds" [value]="breed.id">
+              {{ breed.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Selected Breed Details -->
+    <div *ngIf="selectedBreed" class="breed-details">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2>{{ selectedBreed.name }}</h2>
+        </div>
+        <div class="card-body">
+          <div class="breed-info-grid">
+            <!-- Carousel -->
+            <div class="breed-carousel">
+              <app-loader *ngIf="loadingImages"></app-loader>
+              <app-carousel
+                *ngIf="!loadingImages"
+                [images]="breedImages"
+              ></app-carousel>
+            </div>
+
+            <!-- Information -->
+            <div class="breed-info">
+              <div class="info-item">
+                <strong>Origen:</strong> {{ selectedBreed.origin }}
+              </div>
+              <div class="info-item">
+                <strong>Esperanza de Vida:</strong> {{ selectedBreed.life_span }} años
+              </div>
+              <div class="info-item">
+                <strong>Peso:</strong> {{ selectedBreed.weight.metric }} kg
+              </div>
+              <div class="info-item">
+                <strong>Temperamento:</strong> {{ selectedBreed.temperament }}
+              </div>
+              <div class="info-item">
+                <strong>Descripción:</strong>
+                <p>{{ selectedBreed.description }}</p>
+              </div>
+
+              <!-- Characteristics -->
+              <div class="characteristics" *ngIf="selectedBreed.adaptability">
+                <h4>Características</h4>
+                <div class="characteristic-item">
+                  <span>Adaptabilidad:</span>
+                  <div class="rating">{{ getRatingStars(selectedBreed.adaptability) }}</div>
+                </div>
+                <div class="characteristic-item" *ngIf="selectedBreed.affection_level">
+                  <span>Nivel de Afecto:</span>
+                  <div class="rating">{{ getRatingStars(selectedBreed.affection_level) }}</div>
+                </div>
+                <div class="characteristic-item" *ngIf="selectedBreed.child_friendly">
+                  <span>Amigable con Niños:</span>
+                  <div class="rating">{{ getRatingStars(selectedBreed.child_friendly) }}</div>
+                </div>
+                <div class="characteristic-item" *ngIf="selectedBreed.energy_level">
+                  <span>Nivel de Energía:</span>
+                  <div class="rating">{{ getRatingStars(selectedBreed.energy_level) }}</div>
+                </div>
+              </div>
+
+              <a
+                *ngIf="selectedBreed.wikipedia_url"
+                [href]="selectedBreed.wikipedia_url"
+                target="_blank"
+                class="btn btn-primary mt-3"
+              >
+                Más información en Wikipedia
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Breeds Table -->
+    <div class="card">
+      <div class="card-header">
+        <h3>Todas las Razas ({{ breeds.length }})</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Origen</th>
+                <th>Temperamento</th>
+                <th>Esperanza de Vida</th>
+                <th>Peso (kg)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let breed of displayBreeds">
+                <td><strong>{{ breed.name }}</strong></td>
+                <td>{{ breed.origin }}</td>
+                <td>{{ breed.temperament }}</td>
+                <td>{{ breed.life_span }} años</td>
+                <td>{{ breed.weight.metric }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

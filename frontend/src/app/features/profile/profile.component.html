@@ -1,0 +1,65 @@
+<div class="container profile-container">
+  <div class="profile-card card" *ngIf="user">
+    <div class="card-header profile-header">
+      <div class="avatar">
+        {{ initials }}
+      </div>
+      <h2>{{ user.firstName }} {{ user.lastName }}</h2>
+      <p class="user-email">{{ user.email }}</p>
+    </div>
+
+    <div class="card-body">
+      <h3>Información del Usuario</h3>
+
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">ID de Usuario</div>
+          <div class="info-value">{{ user.id }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Nombre</div>
+          <div class="info-value">{{ user.firstName }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Apellido</div>
+          <div class="info-value">{{ user.lastName }}</div>
+        </div>
+
+        <div class="info-item">
+          <div class="info-label">Correo Electrónico</div>
+          <div class="info-value">{{ user.email }}</div>
+        </div>
+
+        <div class="info-item" *ngIf="user.createdAt">
+          <div class="info-label">Miembro Desde</div>
+          <div class="info-value">{{ user.createdAt | date: 'medium' }}</div>
+        </div>
+      </div>
+
+      <div class="alert alert-success mt-4">
+        <strong>🎉 ¡Bienvenido!</strong> Has iniciado sesión exitosamente.
+      </div>
+
+      <div class="action-buttons">
+        <button class="btn btn-primary" routerLink="/breeds">
+          Explorar Razas
+        </button>
+        <button class="btn btn-primary" routerLink="/search">
+          Buscar Razas
+        </button>
+        <button class="btn btn-danger" (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-warning" *ngIf="!user">
+    <p>No has iniciado sesión. Por favor inicia sesión para ver tu perfil.</p>
+    <button class="btn btn-primary" routerLink="/auth/login">
+      Ir a Iniciar Sesión
+    </button>
+  </div>
+</div>

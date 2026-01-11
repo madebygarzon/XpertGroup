@@ -1,0 +1,89 @@
+<div class="container search-container">
+  <h1 class="page-title">Buscar Razas de Gatos</h1>
+
+  <!-- Search Form -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="search-form">
+        <div class="form-group flex-grow">
+          <label for="searchInput" class="form-label">Buscar por nombre o características:</label>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="ej., Persa, amigable, activo..."
+            [(ngModel)]="searchQuery"
+            (keyup.enter)="onSearch()"
+          >
+        </div>
+
+        <div class="search-buttons">
+          <button
+            class="btn btn-primary"
+            (click)="onSearch()"
+            [disabled]="loading"
+          >
+            {{ loading ? 'Buscando...' : 'Buscar' }}
+          </button>
+
+          <button
+            class="btn btn-outline"
+            (click)="clearSearch()"
+            [disabled]="loading || !searched"
+          >
+            Limpiar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-loader *ngIf="loading"></app-loader>
+
+  <div class="alert alert-error" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Results -->
+  <div class="card" *ngIf="!loading && (searched || breeds.length > 0)">
+    <div class="card-header">
+      <h3>
+        {{ searched ? 'Resultados de Búsqueda' : 'Todas las Razas' }}
+        ({{ displayBreeds.length }})
+      </h3>
+    </div>
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Origen</th>
+              <th>Temperamento</th>
+              <th>Esperanza de Vida</th>
+              <th>Peso (kg)</th>
+              <th>Descripción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let breed of displayBreeds">
+              <td><strong>{{ breed.name }}</strong></td>
+              <td>{{ breed.origin }}</td>
+              <td>{{ breed.temperament }}</td>
+              <td>{{ breed.life_span }} años</td>
+              <td>{{ breed.weight.metric }}</td>
+              <td class="description-cell">
+                {{ breed.description }}
+              </td>
+            </tr>
+            <tr *ngIf="displayBreeds.length === 0">
+              <td colspan="6" class="text-center">
+                No hay razas para mostrar
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
