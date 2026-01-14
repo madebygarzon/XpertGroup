@@ -1,4 +1,13 @@
-# Prueba técnica -Aplicación Full Stack- The Cat Api
+# Prueba Técnica – Aplicación Full Stack (Node.js, Angular, MongoDB)
+
+## TL;DR
+
+- Fullstack app con Node.js + Express + MongoDB + Angular 17
+- Clean Architecture + SOLID
+- Autenticación JWT
+- 59 tests (Backend + Frontend)
+- Docker Compose listo para producción
+
 > Aplicación full-stack desarrollada como prueba técnica para la vacante -Analista de desarrollo Fullstack- en XpertGroup  
 
 ## 📋 Tabla de Contenidos
@@ -390,7 +399,7 @@ PORT=3000
 MONGODB_URI=mongodb://localhost:27017/catapi
 
 # API Key de The Cat API (https://thecatapi.com/)
-CAT_API_KEY=live_JBT0Ah0Nt12iyl2IpjQVLDWjcLk0GQwf4zI9wBMfmfejKmcC31mOJp4yJz5TsOUP
+CAT_API_KEY=your_cat_api_key_here
 
 # Secret para firmar tokens JWT (cambiar en producción)
 JWT_SECRET=your-super-secret-jwt-key
@@ -403,6 +412,9 @@ CORS_ORIGIN=http://localhost:4200
 - En producción, cambia `JWT_SECRET` por un valor aleatorio seguro
 - Obtén tu propia API Key en [The Cat API](https://thecatapi.com/)
 - Para Docker, usa `MONGODB_URI=mongodb://mongodb:27017/catapi`
+- Aunque el enunciado original solicitaba endpoints GET para login y registro,
+se implementaron como POST siguiendo buenas prácticas de seguridad,
+evitando exponer credenciales en la URL.
 
 ### Frontend (`frontend/src/environments/`)
 
