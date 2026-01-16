@@ -821,11 +821,3 @@ Ver `backend/EXTENSIONS.md` para análisis detallado de extensiones propuestas.
 ## 📄 Licencia
 
 Este proyecto está bajo la licencia MIT.
-
----
-
-<div align="center">
-
-**Desarrollado con ❤️ usando Clean Architecture y SOLID Principles**
-
-</div>
