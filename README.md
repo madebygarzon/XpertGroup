@@ -47,6 +47,13 @@ cd ../frontend && npm test
 ## Business Value
 This project shows strong readiness for real product teams by combining software design discipline, delivery pragmatism, and maintainable implementation.
 
+---
 ## Author
-**Carlos Garzón**  
-Software Engineer | Full Stack Developer
+
+- Created by **Carlos Garzón**
+- Software Engineer, Fullstack Developer.
+---
+
+## Licenses
+
+MIT
